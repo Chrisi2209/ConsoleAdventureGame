@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic
+using System.Collections.Generic;
 
 namespace ConsoleAdventureGame
 {
@@ -121,7 +121,7 @@ namespace ConsoleAdventureGame
         public Waffe waffe { get; set; }
         public string[] angriffstexte { get; set; }
 
-        public Gegner(int maxLeben, string name, Waffe[] verfügbareWaffen, double[] waffenHäufigkeit, string[] angriffstexte, )
+        public Gegner(int maxLeben, string name, Waffe[] verfügbareWaffen, double[] waffenHäufigkeit, string[] angriffstexte)
         {
             this.maxLeben = maxLeben;
             leben = maxLeben;
