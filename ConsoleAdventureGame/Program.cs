@@ -10,6 +10,46 @@ namespace ConsoleAdventureGame
          * Methoden, Klassen: Groß anfangen, weitere Wörter aneinander mit Großbuchstaben (pascalcase) bsp: IchBinCool
          * eigene Zeile für geschwungene Klammern 
          * 
+         * 
+         * 
+         * 
+         * Game design
+         * Biome:
+         * - Wald
+         * - Wüste
+         * - Sumpf
+         * - Flachland
+         * - Vulkan
+         * - Höhle
+         * - Verließ
+         * - Friedhof
+         * 
+         * Gegner:
+         * - Schleim, verschiedene Farben und Namen für verschiedene Biome (Sumpf, Flachland)
+         * - Oger  - Ork ?
+         * - Goblins
+         * - Fledermaus (Höhle)
+         * - Skelette (Höhle, Verließ, Friedhof)
+         * - Magier (Wald)
+         * - Hexe, spawnt Skelette (Wald, Fridhof, Verließ)
+         * - 
+         * 
+         * Waffen:
+         * - Axt
+         * - Schwert (verschiedene Arten z.B.: Langschwert)
+         * - Dolch
+         * - Fäuste
+         * - Steinschleuder
+         * - Bogen
+         * - Krallenhamdschuhe
+         * 
+         * Rüstungen
+         * - Teile:
+         * -- Rüstung
+         * -- Schuhe
+         * 
+         * - Kettenrüstung
+         * - 
         */
         static void Main(string[] args)
         {
