@@ -54,10 +54,165 @@ namespace ConsoleAdventureGame
         static void Main(string[] args)
         {
             // Test für Asuwahltexte
+            //*
             Console.WriteLine(Auswahltexte(new string[] { "a", "b", "c", "d" }, "Hallo, jemand geift \n dich an, was machst \n du?"));
+            /*/
+
+            // Test für ZufälligerWertAusArray
+            /*
+            string[] obstSorten = { "Apfel", "Birne", "Kiwi", "Orange", "Weintraube", "Himbere" };
+            int[] häufigkeiten = { 3, 3, 1, 2, 4, 5 };
+            int[] anzahlen = new int[obstSorten.Length];
+            for (int i = 0; i < 18000; i++)
+            {
+                string obst = ZufälligerWertAusArray(obstSorten, häufigkeiten);
+                for (int j = 0; j < obstSorten.Length; j++)
+                {
+                    if (obst == obstSorten[j])
+                    {
+                        anzahlen[j]++;
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < obstSorten.Length; i++)
+            {
+                Console.WriteLine(obstSorten[i] + ": " + anzahlen[i]);
+            }
+            */
         }
 
 
+        static string ZufälligerWertAusArray(string[] array)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+            int index = random.Next(array.Length);
+            return array[index];
+        }
+        static double ZufälligerWertAusArray(double[] array)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+            int index = random.Next(array.Length);
+            return array[index];
+        }
+        static int ZufälligerWertAusArray(int[] array)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+            int index = random.Next(array.Length);
+            return array[index];
+        }
+        static string ZufälligerWertAusArray(string[] array, double[] häufigkeiten)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+
+            double zufallsWert = random.NextDouble();
+            if (zufallsWert == 0) return array[0];
+            zufallsWert *= Summe(häufigkeiten);
+            if (zufallsWert == 0) throw new Exception("Die Summe der Häufigkeiten darf nicht 0 sein!");
+
+            int index = 0;
+            double summe = 0;
+            while (summe < zufallsWert) summe += häufigkeiten[index++];
+            return array[index - 1];
+        }
+        static string ZufälligerWertAusArray(string[] array, int[] häufigkeiten)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+
+            double zufallsWert = random.NextDouble();
+            if (zufallsWert == 0) return array[0];
+            zufallsWert *= Summe(häufigkeiten);
+            if (zufallsWert == 0) throw new Exception("Die Summe der Häufigkeiten darf nicht 0 sein!");
+
+            int index = 0;
+            int summe = 0;
+            while (summe < zufallsWert) summe += häufigkeiten[index++];
+            return array[index - 1];
+        }
+        static double ZufälligerWertAusArray(double[] array, double[] häufigkeiten)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+
+            double zufallsWert = random.NextDouble();
+            if (zufallsWert == 0) return array[0];
+            zufallsWert *= Summe(häufigkeiten);
+            if (zufallsWert == 0) throw new Exception("Die Summe der Häufigkeiten darf nicht 0 sein!");
+
+            int index = 0;
+            double summe = 0;
+            while (summe < zufallsWert) summe += häufigkeiten[index++];
+            return array[index - 1];
+        }
+        static double ZufälligerWertAusArray(double[] array, int[] häufigkeiten)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+
+            double zufallsWert = random.NextDouble();
+            if (zufallsWert == 0) return array[0];
+            zufallsWert *= Summe(häufigkeiten);
+            if (zufallsWert == 0) throw new Exception("Die Summe der Häufigkeiten darf nicht 0 sein!");
+
+            int index = 0;
+            int summe = 0;
+            while (summe < zufallsWert) summe += häufigkeiten[index++];
+            return array[index - 1];
+        }
+        static int ZufälligerWertAusArray(int[] array, double[] häufigkeiten)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+
+            double zufallsWert = random.NextDouble();
+            if (zufallsWert == 0) return array[0];
+            zufallsWert *= Summe(häufigkeiten);
+            if (zufallsWert == 0) throw new Exception("Die Summe der Häufigkeiten darf nicht 0 sein!");
+
+            int index = 0;
+            double summe = 0;
+            while (summe < zufallsWert) summe += häufigkeiten[index++];
+            return array[index - 1];
+        }
+        static int ZufälligerWertAusArray(int[] array, int[] häufigkeiten)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+
+            double zufallsWert = random.NextDouble();
+            if (zufallsWert == 0) return array[0];
+            zufallsWert *= Summe(häufigkeiten);
+            if (zufallsWert == 0) throw new Exception("Die Summe der Häufigkeiten darf nicht 0 sein!");
+
+            int index = 0;
+            int summe = 0;
+            while (summe < zufallsWert) summe += häufigkeiten[index++];
+            return array[index - 1];
+        }
         static double ZufallsGeneratorMitNormalverteilung(double min, double max, double erwartungsWert, double standartAbweichung)
         {
             Random random = new Random();
@@ -114,14 +269,19 @@ namespace ConsoleAdventureGame
         // frageText gibt an, was gerade auf dem Bildschirm steht.
         static int Auswahltexte(string[] auswahlmöglichkeiten, string frageText)
         {
+            // returnwert
             int ausgewählterText = 0;
+
+            // hierdrin wird gespeichert, welcher Knopf gefrückt wurde
             ConsoleKey gedrückterKnopf;
-            
+
             do
             {
+                // Bei jedem Durchlauf muss alles von neu geschrieben werden
                 Console.Clear();
                 Console.WriteLine(frageText);
 
+                // Auswahlmöglichkeiten ausgeben (ausgewähltes ist weiß hinterlegt)
                 for (int i = 0; i < auswahlmöglichkeiten.Length; i++)
                 {
                     if (i == ausgewählterText)
@@ -139,9 +299,13 @@ namespace ConsoleAdventureGame
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.White;
 
+                do
+                {
+                    gedrückterKnopf = Console.ReadKey(true).Key;
+                } while (gedrückterKnopf != ConsoleKey.Enter && gedrückterKnopf != ConsoleKey.UpArrow && gedrückterKnopf != ConsoleKey.DownArrow);
 
-                gedrückterKnopf = Console.ReadKey(false).Key;
-
+                // Auswirkungen des Knopfdrucks berechnen
+                // Der ausgewählteText verhält sich modularisch
                 switch (gedrückterKnopf)
                 {
                     case ConsoleKey.UpArrow:
@@ -170,6 +334,24 @@ namespace ConsoleAdventureGame
             } while (gedrückterKnopf != ConsoleKey.Enter);
 
             return ausgewählterText;
+        }
+        static string Summe(string[] doubleArray)
+        {
+            string summe = "";
+            for (int i = 0; i < doubleArray.Length; i++) summe += doubleArray[i];
+            return summe;
+        }
+        static double Summe(double[] doubleArray)
+        {
+            double summe = 0;
+            for (int i = 0; i < doubleArray.Length; i++) summe += doubleArray[i];
+            return summe;
+        }
+        static int Summe(int[] doubleArray)
+        {
+            int summe = 0;
+            for (int i = 0; i < doubleArray.Length; i++) summe += doubleArray[i];
+            return summe;
         }
     }
 
