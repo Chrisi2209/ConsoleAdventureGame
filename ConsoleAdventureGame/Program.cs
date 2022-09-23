@@ -1,56 +1,57 @@
-﻿using System;
+﻿/* Stilvorschriften
+ * 
+ * Variablen: klein anfangen, weitere Wörter aneinander mit Großbuchstaben (camelcase) bsp: ichBinCool
+ * Methoden, Klassen: Groß anfangen, weitere Wörter aneinander mit Großbuchstaben (pascalcase) bsp: IchBinCool
+ * eigene Zeile für geschwungene Klammern (außer bei do while Schleifen, da ist das while in derselben Zeile wie das }.)
+ * 
+ * 
+ * 
+ * 
+ * Game design
+ * Biome:
+ * - Wald
+ * - Wüste
+ * - Sumpf
+ * - Flachland
+ * - Vulkan
+ * - Höhle
+ * - Verließ
+ * - Friedhof
+ * 
+ * Gegner:
+ * - Schleim, verschiedene Farben und Namen für verschiedene Biome (Sumpf, Flachland)
+ * - Oger  - Ork ?
+ * - Goblins
+ * - Fledermaus (Höhle)
+ * - Skelette (Höhle, Verließ, Friedhof)
+ * - Magier (Wald)
+ * - Hexe, spawnt Skelette (Wald, Fridhof, Verließ)
+ * - 
+ * 
+ * Waffen:
+ * - Axt
+ * - Schwert (verschiedene Arten z.B.: Langschwert)
+ * - Dolch
+ * - Fäuste
+ * - Steinschleuder
+ * - Bogen
+ * - Krallenhamdschuhe
+ * 
+ * Rüstungen
+ * - Teile:
+ * -- Rüstung
+ * -- Schuhe
+ * 
+ * - Kettenrüstung
+ * - 
+*/
+
+using System;
 
 namespace ConsoleAdventureGame
 {
     class Program
     {
-        /* Stilvorschriften
-         * 
-         * Variablen: klein anfangen, weitere Wörter aneinander mit Großbuchstaben (camelcase) bsp: ichBinCool
-         * Methoden, Klassen: Groß anfangen, weitere Wörter aneinander mit Großbuchstaben (pascalcase) bsp: IchBinCool
-         * eigene Zeile für geschwungene Klammern (außer bei do while Schleifen, da ist das while in derselben Zeile wie das }.)
-         * 
-         * 
-         * 
-         * 
-         * Game design
-         * Biome:
-         * - Wald
-         * - Wüste
-         * - Sumpf
-         * - Flachland
-         * - Vulkan
-         * - Höhle
-         * - Verließ
-         * - Friedhof
-         * 
-         * Gegner:
-         * - Schleim, verschiedene Farben und Namen für verschiedene Biome (Sumpf, Flachland)
-         * - Oger  - Ork ?
-         * - Goblins
-         * - Fledermaus (Höhle)
-         * - Skelette (Höhle, Verließ, Friedhof)
-         * - Magier (Wald)
-         * - Hexe, spawnt Skelette (Wald, Fridhof, Verließ)
-         * - 
-         * 
-         * Waffen:
-         * - Axt
-         * - Schwert (verschiedene Arten z.B.: Langschwert)
-         * - Dolch
-         * - Fäuste
-         * - Steinschleuder
-         * - Bogen
-         * - Krallenhamdschuhe
-         * 
-         * Rüstungen
-         * - Teile:
-         * -- Rüstung
-         * -- Schuhe
-         * 
-         * - Kettenrüstung
-         * - 
-        */
         static void Main(string[] args)
         {
             // Test für Asuwahltexte
