@@ -60,9 +60,9 @@ namespace ConsoleAdventureGame
 
     }
 
-    class Mathe
+    static class Mathe
     {
-        public string ZufälligerWertAusArray(string[] array)
+        static public string ZufälligerWertAusArray(string[] array)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -71,7 +71,7 @@ namespace ConsoleAdventureGame
             int index = random.Next(array.Length);
             return array[index];
         }
-        public double ZufälligerWertAusArray(double[] array)
+        static public double ZufälligerWertAusArray(double[] array)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -80,7 +80,7 @@ namespace ConsoleAdventureGame
             int index = random.Next(array.Length);
             return array[index];
         }
-        public int ZufälligerWertAusArray(int[] array)
+        static public int ZufälligerWertAusArray(int[] array)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -89,7 +89,7 @@ namespace ConsoleAdventureGame
             int index = random.Next(array.Length);
             return array[index];
         }
-        public string ZufälligerWertAusArray(string[] array, double[] häufigkeiten)
+        static public string ZufälligerWertAusArray(string[] array, double[] häufigkeiten)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -106,7 +106,7 @@ namespace ConsoleAdventureGame
             while (summe < zufallsWert) summe += häufigkeiten[index++];
             return array[index - 1];
         }
-        public string ZufälligerWertAusArray(string[] array, int[] häufigkeiten)
+        static public string ZufälligerWertAusArray(string[] array, int[] häufigkeiten)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -123,7 +123,7 @@ namespace ConsoleAdventureGame
             while (summe < zufallsWert) summe += häufigkeiten[index++];
             return array[index - 1];
         }
-        public double ZufälligerWertAusArray(double[] array, double[] häufigkeiten)
+        static public double ZufälligerWertAusArray(double[] array, double[] häufigkeiten)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -140,7 +140,7 @@ namespace ConsoleAdventureGame
             while (summe < zufallsWert) summe += häufigkeiten[index++];
             return array[index - 1];
         }
-        public double ZufälligerWertAusArray(double[] array, int[] häufigkeiten)
+        static public double ZufälligerWertAusArray(double[] array, int[] häufigkeiten)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -157,7 +157,7 @@ namespace ConsoleAdventureGame
             while (summe < zufallsWert) summe += häufigkeiten[index++];
             return array[index - 1];
         }
-        public int ZufälligerWertAusArray(int[] array, double[] häufigkeiten)
+        static public int ZufälligerWertAusArray(int[] array, double[] häufigkeiten)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -174,7 +174,7 @@ namespace ConsoleAdventureGame
             while (summe < zufallsWert) summe += häufigkeiten[index++];
             return array[index - 1];
         }
-        public int ZufälligerWertAusArray(int[] array, int[] häufigkeiten)
+        static public int ZufälligerWertAusArray(int[] array, int[] häufigkeiten)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -191,7 +191,7 @@ namespace ConsoleAdventureGame
             while (summe < zufallsWert) summe += häufigkeiten[index++];
             return array[index - 1];
         }
-        public double ZufallsGeneratorMitNormalverteilung(double min, double max, double erwartungsWert, double standartAbweichung)
+        static public double ZufallsGeneratorMitNormalverteilung(double min, double max, double erwartungsWert, double standartAbweichung)
         {
             Random random = new Random();
             double r = random.NextDouble();
@@ -210,7 +210,7 @@ namespace ConsoleAdventureGame
             if (b < y) y = b;
             return y;
         }
-        public double erf(double x)
+        static public double erf(double x)
         {
             if (x == 0) return 0;
 
@@ -224,7 +224,7 @@ namespace ConsoleAdventureGame
             if (0 <= x) return 1 - tau;
             else return tau - 1;
         }
-        public double InversErf(double x)
+        static public double InversErf(double x)
         {
             if (x == 0) return 0;
 
@@ -241,19 +241,19 @@ namespace ConsoleAdventureGame
             }
             return y;
         }
-        public string Summe(string[] doubleArray)
+        static public string Summe(string[] doubleArray)
         {
             string summe = "";
             for (int i = 0; i < doubleArray.Length; i++) summe += doubleArray[i];
             return summe;
         }
-        public double Summe(double[] doubleArray)
+        static public double Summe(double[] doubleArray)
         {
             double summe = 0;
             for (int i = 0; i < doubleArray.Length; i++) summe += doubleArray[i];
             return summe;
         }
-        public int Summe(int[] doubleArray)
+        static public int Summe(int[] doubleArray)
         {
             int summe = 0;
             for (int i = 0; i < doubleArray.Length; i++) summe += doubleArray[i];
@@ -283,8 +283,6 @@ namespace ConsoleAdventureGame
 
     class Waffe
     {
-        Mathe mathe = new Mathe();
-
         public string name { get; set; }
         public int stufe { get; set; }
         public double schadenProStufe { get; set; }
@@ -293,7 +291,7 @@ namespace ConsoleAdventureGame
         public double schaden { get; set; }
         public Waffe(string name, int stufe, double schadenProStufe, double maxSchadensAbweichung, double durchschnittlicheSchadensAbweichung, double schaden)
         {
-            schaden = mathe.ZufallsGeneratorMitNormalverteilung(stufe * schadenProStufe - maxSchadensAbweichung, stufe * schadenProStufe + maxSchadensAbweichung, stufe * schadenProStufe, durchschnittlicheSchadensAbweichung);
+            schaden = Mathe.ZufallsGeneratorMitNormalverteilung(stufe * schadenProStufe - maxSchadensAbweichung, stufe * schadenProStufe + maxSchadensAbweichung, stufe * schadenProStufe, durchschnittlicheSchadensAbweichung);
 
         }
     }
