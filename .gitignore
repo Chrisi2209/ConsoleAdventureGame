@@ -1,5 +1,3 @@
-/ConsoleAdventureGame.sln
 /.vs
-/ConsoleAdventureGame/bin
-/ConsoleAdventureGame/obj
-/ConsoleAdventureGame/ConsoleAdventureGame.csproj
+/ConsoleAdventureGame
+/ConsoleAdventureGame.sln
