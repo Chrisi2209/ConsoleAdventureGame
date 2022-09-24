@@ -53,6 +53,22 @@ namespace ConsoleAdventureGame
         */
         static void Main(string[] args)
         {
+            if (false)
+            {
+                SpielStart();
+                while (true)
+                {
+                    // out: quest
+                    QuestAuswahl();
+
+                    // in: quest, spielerNeu
+                    QuestAbspielen();
+
+                    // spieler = spielerNeu
+                }
+            }
+
+
             // Test für Asuwahltexte
             //*
             Console.WriteLine(Auswahltexte(new string[] { "a", "b", "c", "d" }, "Hallo, jemand geift \n dich an, was machst \n du?"));
@@ -81,6 +97,21 @@ namespace ConsoleAdventureGame
                 Console.WriteLine(obstSorten[i] + ": " + anzahlen[i]);
             }
             */
+        }
+
+        static void SpielStart()
+        {
+
+        }
+
+        static void QuestAuswahl()
+        {
+
+        }
+
+        static void QuestAbspielen()
+        {
+
         }
 
         // Gibt die Auswahlmöglichkeiten aus und lässt den Benutzer eine auswählen.
