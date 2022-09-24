@@ -1,56 +1,57 @@
-﻿using System;
+﻿/* Stilvorschriften
+ * 
+ * Variablen: klein anfangen, weitere Wörter aneinander mit Großbuchstaben (camelcase) bsp: ichBinCool
+ * Methoden, Klassen: Groß anfangen, weitere Wörter aneinander mit Großbuchstaben (pascalcase) bsp: IchBinCool
+ * eigene Zeile für geschwungene Klammern (außer bei do while Schleifen, da ist das while in derselben Zeile wie das }.)
+ * 
+ * 
+ * 
+ * 
+ * Game design
+ * Biome:
+ * - Wald
+ * - Wüste
+ * - Sumpf
+ * - Flachland
+ * - Vulkan
+ * - Höhle
+ * - Verließ
+ * - Friedhof
+ * 
+ * Gegner:
+ * - Schleim, verschiedene Farben und Namen für verschiedene Biome (Sumpf, Flachland)
+ * - Oger  - Ork ?
+ * - Goblins
+ * - Fledermaus (Höhle)
+ * - Skelette (Höhle, Verließ, Friedhof)
+ * - Magier (Wald)
+ * - Hexe, spawnt Skelette (Wald, Fridhof, Verließ)
+ * - 
+ * 
+ * Waffen:
+ * - Axt
+ * - Schwert (verschiedene Arten z.B.: Langschwert)
+ * - Dolch
+ * - Fäuste
+ * - Steinschleuder
+ * - Bogen
+ * - Krallenhamdschuhe
+ * 
+ * Rüstungen
+ * - Teile:
+ * -- Rüstung
+ * -- Schuhe
+ * 
+ * - Kettenrüstung
+ * - 
+*/
+
+using System;
 
 namespace ConsoleAdventureGame
 {
     class Program
     {
-        /* Stilvorschriften
-         * 
-         * Variablen: klein anfangen, weitere Wörter aneinander mit Großbuchstaben (camelcase) bsp: ichBinCool
-         * Methoden, Klassen: Groß anfangen, weitere Wörter aneinander mit Großbuchstaben (pascalcase) bsp: IchBinCool
-         * eigene Zeile für geschwungene Klammern (außer bei do while Schleifen, da ist das while in derselben Zeile wie das }.)
-         * 
-         * 
-         * 
-         * 
-         * Game design
-         * Biome:
-         * - Wald
-         * - Wüste
-         * - Sumpf
-         * - Flachland
-         * - Vulkan
-         * - Höhle
-         * - Verließ
-         * - Friedhof
-         * 
-         * Gegner:
-         * - Schleim, verschiedene Farben und Namen für verschiedene Biome (Sumpf, Flachland)
-         * - Oger  - Ork ?
-         * - Goblins
-         * - Fledermaus (Höhle)
-         * - Skelette (Höhle, Verließ, Friedhof)
-         * - Magier (Wald)
-         * - Hexe, spawnt Skelette (Wald, Fridhof, Verließ)
-         * - 
-         * 
-         * Waffen:
-         * - Axt
-         * - Schwert (verschiedene Arten z.B.: Langschwert)
-         * - Dolch
-         * - Fäuste
-         * - Steinschleuder
-         * - Bogen
-         * - Krallenhamdschuhe
-         * 
-         * Rüstungen
-         * - Teile:
-         * -- Rüstung
-         * -- Schuhe
-         * 
-         * - Kettenrüstung
-         * - 
-        */
         static void Main(string[] args)
         {
             if (false)
@@ -69,10 +70,21 @@ namespace ConsoleAdventureGame
             }
 
 
+            // Test für Biomraumanordnung
+            do
+            {
+                Biom a = new Biom("Grasland", new Gegner[] { new Gegner(10, "hi", new Waffe[2], new double[1], new string[1]) }, new Waffe[] { new Waffe("", 0, 1, 1, 1, 1) },
+                    new Raum[] {new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1),
+                new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1) });
+                Console.ReadKey();
+            }
+            while (true);
+
+
             // Test für Asuwahltexte
-            //*
+            /*
             Console.WriteLine(Auswahltexte(new string[] { "a", "b", "c", "d" }, "Hallo, jemand geift \n dich an, was machst \n du?"));
-            /*/
+            */
 
             // Test für ZufälligerWertAusArray
             /*
@@ -421,6 +433,94 @@ namespace ConsoleAdventureGame
         {
             schaden = Mathe.ZufallsGeneratorMitNormalverteilung(stufe * schadenProStufe - maxSchadensAbweichung, stufe * schadenProStufe + maxSchadensAbweichung, stufe * schadenProStufe, durchschnittlicheSchadensAbweichung);
 
+        }
+    }
+
+    // Das ist ein Raum, aus ihnen bestehen Biome
+    class Raum
+    {
+        // Beschreibungstext für den Raum, wird beim eintreten ausgegeben
+        public string beschreibung { get; set; }
+        // Chance, dass ein Gegner beim eintreten auftritt
+        public double chanceGegner { get; set; }
+        public double chanceLoot { get; set; }
+        public Raum(string beschreibung, double chanceGegner, double chanceLoot)
+        {
+
+        }
+
+        // Methode, um den Raum zu betreten
+        public void RaumBetreten()
+        {
+            Console.WriteLine(beschreibung);
+        }
+    }
+
+    class Biom
+    {
+        public string name { get; set; }
+        public Gegner[] gegner { get; set; }
+        public Waffe[] waffen { get; set; }
+        public Raum[] räume { get; set; }
+        public bool[,] raumanordnung { get; set; }
+
+        public Biom(string name, Gegner[] gegner, Waffe[] waffen, Raum[] räume)
+        {
+            this.name = name;
+            this.gegner = gegner;
+            this.waffen = waffen;
+            this.räume = räume;
+            RaumanordnungBerechnen();
+        }
+
+        /*
+         * Methode, um das Layout der Räume in einem Biom zu erstellen
+         * ein walker geht immer in eine zufällige Richtung und setzt dort einen
+         * Raum hin, bis er alle Räume platziert hat.
+         */
+        private void RaumanordnungBerechnen()
+        {
+            // in diesem array steht 1 für hier ist ein Raum und 0 für hier ist kein raum.
+            raumanordnung = new bool[räume.Length, räume.Length];
+
+            // Diese Variablen geben an, wo sich der Generator gerade bedindet.
+            int x = räume.Length / 2;
+            int y = räume.Length / 2;
+
+            // In der Mitte kommt erstmal ein Raum
+            raumanordnung[x, y] = true;
+
+            // Zählt wie viele Räume schon gebaut wurden, um die Schleife im richtigen Zeitpunkt zu beenden
+            int raumzähler = 1;
+
+            // ein Array für die deltawerte von nach oben, unten, rechts und links gehen
+            int[,] deltaArray = new int[,] { { 0, -1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+            int[] delta;
+            int randomZahl;
+            Random random = new Random();
+
+            while (raumzähler < räume.Length)
+            {
+                // neues x und y berechnen
+                randomZahl = random.Next(4);
+                delta = new int[] { deltaArray[randomZahl, 0], deltaArray[randomZahl, 1] };
+                x += delta[0];
+                y += delta[1];
+
+                // out of bounds check
+                if (x == raumanordnung.GetLength(0) - 1) x--;
+                else if (x == -1) x++;
+
+                if (y == raumanordnung.GetLength(1) - 1) y--;
+                else if (y == -1) y++;
+
+                // Raum eintragen
+                if (!raumanordnung[x, y])
+                {
+                    raumanordnung[x, y] = true;
+                    raumzähler++; 
+                }
+            }
         }
     }
 }
