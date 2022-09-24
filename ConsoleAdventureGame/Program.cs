@@ -70,7 +70,7 @@ namespace ConsoleAdventureGame
             }
 
 
-            // Test für Biomraumanordnung
+            /* Test für Biomraumanordnung
             do
             {
                 Biom a = new Biom("Grasland", new Gegner[] { new Gegner(10, "hi", new Waffe[2], new double[1], new string[1]) }, new Waffe[] { new Waffe("", 0, 1, 1, 1, 1) },
@@ -79,6 +79,7 @@ namespace ConsoleAdventureGame
                 Console.ReadKey();
             }
             while (true);
+            /**/
 
 
             // Test für Asuwahltexte
@@ -212,6 +213,15 @@ namespace ConsoleAdventureGame
             return array[index];
         }
         static public double ZufälligerWertAusArray(double[] array)
+        {
+            //Ausnahmen
+            if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
+
+            Random random = new Random();
+            int index = random.Next(array.Length);
+            return array[index];
+        }
+        static public int[] ZufälligerWertAusArray(int[][] array)
         {
             //Ausnahmen
             if (array.Length == 0) throw new Exception("Es wurde ein leeres Array eingegeben!");
@@ -460,16 +470,17 @@ namespace ConsoleAdventureGame
     {
         public string name { get; set; }
         public Gegner[] gegner { get; set; }
-        public Waffe[] waffen { get; set; }
+        public Waffe[] waffenGegner { get; set; }
+        public int größe { get; set; }
         public Raum[] räume { get; set; }
         public bool[,] raumanordnung { get; set; }
 
-        public Biom(string name, Gegner[] gegner, Waffe[] waffen, Raum[] räume)
+        public Biom(string name, Gegner[] gegner, Waffe[] waffen, int größe)
         {
             this.name = name;
             this.gegner = gegner;
-            this.waffen = waffen;
-            this.räume = räume;
+            this.waffenGegner = waffen;
+            this.größe = größe;
             RaumanordnungBerechnen();
         }
 
@@ -494,7 +505,7 @@ namespace ConsoleAdventureGame
             int raumzähler = 1;
 
             // ein Array für die deltawerte von nach oben, unten, rechts und links gehen
-            int[,] deltaArray = new int[,] { { 0, -1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+            int[][] deltaArray = new int[][] { new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { 0, -1 }, new int[] { -1, 0 } };
             int[] delta;
             int randomZahl;
             Random random = new Random();
@@ -502,16 +513,15 @@ namespace ConsoleAdventureGame
             while (raumzähler < räume.Length)
             {
                 // neues x und y berechnen
-                randomZahl = random.Next(4);
-                delta = new int[] { deltaArray[randomZahl, 0], deltaArray[randomZahl, 1] };
+                delta = Mathe.ZufälligerWertAusArray(deltaArray);
                 x += delta[0];
                 y += delta[1];
 
                 // out of bounds check
-                if (x == raumanordnung.GetLength(0) - 1) x--;
+                if (x == raumanordnung.GetLength(0)) x--;
                 else if (x == -1) x++;
 
-                if (y == raumanordnung.GetLength(1) - 1) y--;
+                if (y == raumanordnung.GetLength(1)) y--;
                 else if (y == -1) y++;
 
                 // Raum eintragen
@@ -521,6 +531,17 @@ namespace ConsoleAdventureGame
                     raumzähler++; 
                 }
             }
+
+            /*
+            for (int i = 0; i < raumanordnung.GetLength(0); i++)
+            {
+                for (int j = 0; j < raumanordnung.GetLength(1); j++)
+                {
+                    Console.Write(Convert.ToInt32(raumanordnung[i, j]) + " ");
+                }
+                Console.WriteLine();
+            }
+            /**/
         }
     }
 }
