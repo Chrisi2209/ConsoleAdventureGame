@@ -47,6 +47,7 @@
 */
 
 using System;
+using System.Threading;
 
 namespace ConsoleAdventureGame
 {
@@ -60,8 +61,12 @@ namespace ConsoleAdventureGame
 
                 while (true)
                 {
+                    // Test
+                    Quest a = new Quest("der verwunschene Palast", 1, new Biom("Palast", new Gegner[] { }, new int[] { }, 19), new string[] { });
+                    Quest b = new Quest("die toten Sümpfe", 1, new Biom("Sumpf", new Gegner[] { }, new int[] { }, 19), new string[] { });
+                    Quest c = new Quest("die komische Ecke", 1, new Biom("Ecke", new Gegner[] { }, new int[] { }, 2), new string[] { });
                     // out: quest
-                    QuestAuswahl();
+                    Quest ausgewählteQuest = QuestAuswahl(a, b, c, 1);
 
                     // in: quest, spielerNeu
                     QuestAbspielen();
@@ -120,27 +125,29 @@ namespace ConsoleAdventureGame
 
         }
 
-        static void QuestAuswahl()
+        static Quest QuestAuswahl(Quest quest1, Quest quest2, Quest quest3, int spielerLevel)
         {
-            Quest a = new Quest("der verwunschene Palast", 1, new Biom("Palast", new Gegner[] { }, new int[] { }, 19), new string[] { });
-            Quest b = new Quest("die toten Sümpfe", 1, new Biom("Sumpf", new Gegner[] { }, new int[] { }, 19), new string[] { });
-            Quest c = new Quest("die komische Ecke", 1, new Biom("Ecke", new Gegner[] { }, new int[] { }, 2), new string[] { });
-
-            Player player = new Player();
-
-            Quest[] d = new Quest[] { a, b, c };
+            Quest[] quests = new Quest[] { quest1, quest2, quest3 };
             int ausgewählteQuest;
+            bool questAngenommen = false;
 
             do
             {
-                ausgewählteQuest = Auswahltexte(d, "Welche Quest?");
-                d[ausgewählteQuest].BeschreibungSchreiben();
-                if (d[ausgewählteQuest].level > player.level)
+                ausgewählteQuest = Auswahltexte(quests, "Welche Quest?");
+                
+                if (quests[ausgewählteQuest].level > spielerLevel)
                 {
-
+                    Console.WriteLine("");
+                    Auswahltexte(new string[] { "zurück" }, "!!DEIN LEVEL IST NICHT HOCH GENUG!!");
                 }
+                else
+                {
+                    questAngenommen = !Convert.ToBoolean(Auswahltexte(new string[] { "annehmen", "zurück" }, 
+                        quests[ausgewählteQuest].GetBeschreibungstext() + "\n\nQuest annnehmen?"));
+                }
+            } while (!questAngenommen);
 
-            } while (true);
+            return quests[ausgewählteQuest];
         }
 
         static void QuestAbspielen()
@@ -217,6 +224,7 @@ namespace ConsoleAdventureGame
 
             } while (gedrückterKnopf != ConsoleKey.Enter);
 
+            Console.Clear();
             return ausgewählterText;
         }
 
@@ -286,12 +294,12 @@ namespace ConsoleAdventureGame
 
             } while (gedrückterKnopf != ConsoleKey.Enter);
 
+            Console.Clear();
             return ausgewählterText;
         }
 
 
     }
-
 
 
     static class Mathe
@@ -526,7 +534,8 @@ namespace ConsoleAdventureGame
         //biome[nummer]
         static public Biom[] biome =
         {
-
+            //Beispiel
+            // new Biom("Wald", new int[] {3,4,5 }, new int[] {3,4,5 },3)
         };
 
         //gegner[nummer]
@@ -559,6 +568,9 @@ namespace ConsoleAdventureGame
         }
     }
 
+    //Jede Quest Spielt sich in einem bestimmten Biom ab.
+    //Beim spielen von einer Quest spielt man auf einer Karte mit mehreren Räumen
+    //Die Karte mit den Räumen wird im Biom-Objekt gespeichert
     class Quest
     {
         public string name { get; set; }
@@ -574,10 +586,9 @@ namespace ConsoleAdventureGame
             this.name = name;
         }
 
-        public void BeschreibungSchreiben()
+        public string GetBeschreibungstext()
         {
-            Console.WriteLine($"name      : {name}");
-            Console.WriteLine($"min. level: {level}");
+            return $"name      : {name}\nmin.level : { level}";
         }
     }
 
