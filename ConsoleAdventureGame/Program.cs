@@ -57,6 +57,7 @@ namespace ConsoleAdventureGame
             if (false)
             {
                 SpielStart();
+
                 while (true)
                 {
                     // out: quest
@@ -200,6 +201,7 @@ namespace ConsoleAdventureGame
         }
 
     }
+
 
     static class Mathe
     {
@@ -411,6 +413,179 @@ namespace ConsoleAdventureGame
         }
     }
 
+    static class SpielDaten
+    {
+        /*
+         * Hier werden alle größeren Datenmengen erstellt
+         * (alle möglichen Quests/Biome/Gegner/Waffen)
+         * 
+         * Das level gibt hier nur an welches level der Spieler benötigt, um es freizuschalten, 
+         * muss aber nichts mit dem level des Objektes zu tun haben. (Bsp. Waffe-Level)
+         */
+
+        //quests[level][nummer]
+        static public Quest[][] quests =
+        {
+            new Quest[]
+            {
+                //Beispiel
+                new Quest(1,0,"Hallo"),
+                new Quest(2,1,"Jetzt geht es los")
+            }
+        };
+
+        //biome[nummer]
+        static public Biom[] biome =
+        {
+            //Beispiel
+            new Biom("Wald", new int[] {3,4,5 }, new int[] {3,4,5 },3)
+        };
+
+        //gegner[nummer]
+        static public Gegner[] gegner =
+        {
+
+        };
+
+        //waffen[level][nummer]
+        static public Waffe[][] waffen =
+        {
+            new Waffe[]
+            {
+
+            }
+        };
+
+    }
+
+
+    class Spieler
+    {
+        public int maxLeben { get; set; }
+        public double level { get; set; }
+
+        public Spieler()
+        {
+            maxLeben = 10;
+            level = 1;
+        }
+    }
+
+    //Jede Quest Spielt sich in einem bestimmten Biom ab.
+    //Beim spielen von einer Quest spielt man auf einer Karte mit mehreren Räumen
+    //Die Karte mit den Räumen wird im Biom-Objekt gespeichert
+    class Quest
+    {
+        public int level { get; set; }
+        public string text { get; set; }
+        public int biomNummer { get; set; }
+
+        public Quest(int minSpielerLevel, int biomNummer, string text)
+        {
+            this.level = minSpielerLevel;
+            this.text = text;
+            this.biomNummer = biomNummer;
+        }
+    }
+
+    class Biom
+    {
+        public string BiomName { get; set; }
+        public int[] gegnerNummer { get; set; }
+        public int[] waffenNummer { get; set; }
+        public int KartenGröße { get; set; }
+        public Raum[] räume { get; set; }
+        public bool[,] Karte { get; set; }
+
+        public Biom(string BiomName, int[] gegnerNumer, int[] waffenNummer, int KartenGröße)
+        {
+            this.BiomName = BiomName;
+            this.gegnerNummer = gegnerNumer;
+            this.waffenNummer = waffenNummer;
+            this.KartenGröße = KartenGröße;
+            KarteGenerieren();
+        }
+
+        /*
+         * Methode, um das Layout der Räume in einem Biom zu erstellen
+         * ein walker geht immer in eine zufällige Richtung und setzt dort einen
+         * Raum hin, bis er alle Räume platziert hat.
+         */
+        private void KarteGenerieren()
+        {
+            // in diesem array steht 1 für hier ist ein Raum und 0 für hier ist kein raum.
+            Karte = new bool[räume.Length, räume.Length];
+
+            // Diese Variablen geben an, wo sich der Generator gerade bedindet.
+            int x = räume.Length / 2;
+            int y = räume.Length / 2;
+
+            // In der Mitte kommt erstmal ein Raum
+            Karte[x, y] = true;
+
+            // Zählt wie viele Räume schon gebaut wurden, um die Schleife im richtigen Zeitpunkt zu beenden
+            int raumzähler = 1;
+
+            // ein Array für die deltawerte von nach oben, unten, rechts und links gehen
+            int[][] deltaArray = new int[][] { new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { 0, -1 }, new int[] { -1, 0 } };
+            int[] delta;
+            Random random = new Random();
+
+            while (raumzähler < räume.Length)
+            {
+                // neues x und y berechnen
+                delta = Mathe.ZufälligerWertAusArray(deltaArray);
+                x += delta[0];
+                y += delta[1];
+
+                // out of bounds check
+                if (x == Karte.GetLength(0)) x--;
+                else if (x == -1) x++;
+
+                if (y == Karte.GetLength(1)) y--;
+                else if (y == -1) y++;
+
+                // Raum eintragen
+                if (!Karte[x, y])
+                {
+                    Karte[x, y] = true;
+                    raumzähler++;
+                }
+            }
+
+            /*
+            for (int i = 0; i < raumanordnung.GetLength(0); i++)
+            {
+                for (int j = 0; j < raumanordnung.GetLength(1); j++)
+                {
+                    Console.Write(Convert.ToInt32(raumanordnung[i, j]) + " ");
+                }
+                Console.WriteLine();
+            }
+            /**/
+        }
+    }
+
+    // Das ist ein Raum, aus ihnen bestehen Biome
+    class Raum
+    {
+        // Beschreibungstext für den Raum, wird beim eintreten ausgegeben
+        public string beschreibung { get; set; }
+        // Chance, dass ein Gegner beim eintreten auftritt
+        public double chanceGegner { get; set; }
+        public double chanceLoot { get; set; }
+        public Raum(string beschreibung, double chanceGegner, double chanceLoot)
+        {
+
+        }
+
+        // Methode, um den Raum zu betreten
+        public void RaumBetreten()
+        {
+            Console.WriteLine(beschreibung);
+        }
+    }
+
     class Gegner
     {
         // vielleicht verschiedene Gegner verschiedene Unterklassen
@@ -443,105 +618,6 @@ namespace ConsoleAdventureGame
         {
             schaden = Mathe.ZufallsGeneratorMitNormalverteilung(stufe * schadenProStufe - maxSchadensAbweichung, stufe * schadenProStufe + maxSchadensAbweichung, stufe * schadenProStufe, durchschnittlicheSchadensAbweichung);
 
-        }
-    }
-
-    // Das ist ein Raum, aus ihnen bestehen Biome
-    class Raum
-    {
-        // Beschreibungstext für den Raum, wird beim eintreten ausgegeben
-        public string beschreibung { get; set; }
-        // Chance, dass ein Gegner beim eintreten auftritt
-        public double chanceGegner { get; set; }
-        public double chanceLoot { get; set; }
-        public Raum(string beschreibung, double chanceGegner, double chanceLoot)
-        {
-
-        }
-
-        // Methode, um den Raum zu betreten
-        public void RaumBetreten()
-        {
-            Console.WriteLine(beschreibung);
-        }
-    }
-
-    class Biom
-    {
-        public string name { get; set; }
-        public Gegner[] gegner { get; set; }
-        public Waffe[] waffenGegner { get; set; }
-        public int größe { get; set; }
-        public Raum[] räume { get; set; }
-        public bool[,] raumanordnung { get; set; }
-
-        public Biom(string name, Gegner[] gegner, Waffe[] waffen, int größe)
-        {
-            this.name = name;
-            this.gegner = gegner;
-            this.waffenGegner = waffen;
-            this.größe = größe;
-            RaumanordnungBerechnen();
-        }
-
-        /*
-         * Methode, um das Layout der Räume in einem Biom zu erstellen
-         * ein walker geht immer in eine zufällige Richtung und setzt dort einen
-         * Raum hin, bis er alle Räume platziert hat.
-         */
-        private void RaumanordnungBerechnen()
-        {
-            // in diesem array steht 1 für hier ist ein Raum und 0 für hier ist kein raum.
-            raumanordnung = new bool[räume.Length, räume.Length];
-
-            // Diese Variablen geben an, wo sich der Generator gerade bedindet.
-            int x = räume.Length / 2;
-            int y = räume.Length / 2;
-
-            // In der Mitte kommt erstmal ein Raum
-            raumanordnung[x, y] = true;
-
-            // Zählt wie viele Räume schon gebaut wurden, um die Schleife im richtigen Zeitpunkt zu beenden
-            int raumzähler = 1;
-
-            // ein Array für die deltawerte von nach oben, unten, rechts und links gehen
-            int[][] deltaArray = new int[][] { new int[] { 0, -1 }, new int[] { 1, 0 }, new int[] { 0, -1 }, new int[] { -1, 0 } };
-            int[] delta;
-            int randomZahl;
-            Random random = new Random();
-
-            while (raumzähler < räume.Length)
-            {
-                // neues x und y berechnen
-                delta = Mathe.ZufälligerWertAusArray(deltaArray);
-                x += delta[0];
-                y += delta[1];
-
-                // out of bounds check
-                if (x == raumanordnung.GetLength(0)) x--;
-                else if (x == -1) x++;
-
-                if (y == raumanordnung.GetLength(1)) y--;
-                else if (y == -1) y++;
-
-                // Raum eintragen
-                if (!raumanordnung[x, y])
-                {
-                    raumanordnung[x, y] = true;
-                    raumzähler++; 
-                }
-            }
-
-            /*
-            for (int i = 0; i < raumanordnung.GetLength(0); i++)
-            {
-                for (int j = 0; j < raumanordnung.GetLength(1); j++)
-                {
-                    Console.Write(Convert.ToInt32(raumanordnung[i, j]) + " ");
-                }
-                Console.WriteLine();
-            }
-            /**/
         }
     }
 }
