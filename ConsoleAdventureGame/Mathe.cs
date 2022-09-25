@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleAdventureGame
 {
-    internal static class Mathe
+    static class Mathe
     {
         static public string ZufälligerWertAusArray(string[] array)
         {

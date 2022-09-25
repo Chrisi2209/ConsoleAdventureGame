@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleAdventureGame
 {
-    internal class Spieler
+    class Spieler
     {
         public int maxLeben { get; set; }
         public int Leben { get; set; }

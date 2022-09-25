@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleAdventureGame
 {
-    internal class Gegner
+    class Gegner
     {
         // vielleicht verschiedene Gegner verschiedene Unterklassen
 

@@ -125,7 +125,7 @@ namespace ConsoleAdventureGame
 
         static void QuestAbspielen()
         {
-            Spieler spuee = new Spieler();
+            
         }
 
         // Gibt die Auswahlmöglichkeiten aus und lässt den Benutzer eine auswählen.

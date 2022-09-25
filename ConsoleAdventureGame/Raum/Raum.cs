@@ -5,7 +5,7 @@ using System.Text;
 namespace ConsoleAdventureGame
 {
     // Das ist ein Raum, aus ihnen bestehen Biome
-    internal class Raum
+    class Raum
     {
         // Beschreibungstext für den Raum, wird beim eintreten ausgegeben
         public string beschreibung { get; set; }

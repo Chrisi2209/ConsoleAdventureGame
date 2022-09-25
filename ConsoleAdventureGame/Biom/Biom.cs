@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConsoleAdventureGame
 {
-    internal class Biom
+    class Biom
     {
         public string name { get; set; }
         public Gegner[] gegner { get; set; }
