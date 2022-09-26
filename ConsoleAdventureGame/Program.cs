@@ -70,47 +70,49 @@ namespace ConsoleAdventureGame
                 }
             }
 
-
-            /* Test für Biomraumanordnung
-            do
+            // Tests
             {
-                Biom a = new Biom("Grasland", new Gegner[] { new Gegner(10, "hi", new Waffe[2], new double[1], new string[1]) }, new Waffe[] { new Waffe("", 0, 1, 1, 1, 1) },
-                    new Raum[] {new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1),
-                new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1) });
-                Console.ReadKey();
-            }
-            while (true);
-            /**/
-
-
-            // Test für Asuwahltexte
-            /*
-            Console.WriteLine(Auswahltexte(new string[] { "a", "b", "c", "d" }, "Hallo, jemand geift \n dich an, was machst \n du?"));
-            */
-
-            // Test für ZufälligerWertAusArray
-            /*
-            string[] obstSorten = { "Apfel", "Birne", "Kiwi", "Orange", "Weintraube", "Himbere" };
-            int[] häufigkeiten = { 3, 3, 1, 2, 4, 5 };
-            int[] anzahlen = new int[obstSorten.Length];
-            for (int i = 0; i < 18000; i++)
-            {
-                string obst = ZufälligerWertAusArray(obstSorten, häufigkeiten);
-                for (int j = 0; j < obstSorten.Length; j++)
+                /* Test für Biomraumanordnung
+                do
                 {
-                    if (obst == obstSorten[j])
+                    Biom a = new Biom("Grasland", new Gegner[] { new Gegner(10, "hi", new Waffe[2], new double[1], new string[1]) }, new Waffe[] { new Waffe("", 0, 1, 1, 1, 1) },
+                        new Raum[] {new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1),
+                    new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1), new Raum("a", 1, 1) });
+                    Console.ReadKey();
+                }
+                while (true);
+                /**/
+
+
+                // Test für Asuwahltexte
+                /*
+                Console.WriteLine(Auswahltexte(new string[] { "a", "b", "c", "d" }, "Hallo, jemand geift \n dich an, was machst \n du?"));
+                */
+
+                // Test für ZufälligerWertAusArray
+                /*
+                string[] obstSorten = { "Apfel", "Birne", "Kiwi", "Orange", "Weintraube", "Himbere" };
+                int[] häufigkeiten = { 3, 3, 1, 2, 4, 5 };
+                int[] anzahlen = new int[obstSorten.Length];
+                for (int i = 0; i < 18000; i++)
+                {
+                    string obst = ZufälligerWertAusArray(obstSorten, häufigkeiten);
+                    for (int j = 0; j < obstSorten.Length; j++)
                     {
-                        anzahlen[j]++;
-                        break;
+                        if (obst == obstSorten[j])
+                        {
+                            anzahlen[j]++;
+                            break;
+                        }
                     }
                 }
-            }
 
-            for (int i = 0; i < obstSorten.Length; i++)
-            {
-                Console.WriteLine(obstSorten[i] + ": " + anzahlen[i]);
+                for (int i = 0; i < obstSorten.Length; i++)
+                {
+                    Console.WriteLine(obstSorten[i] + ": " + anzahlen[i]);
+                }
+                */
             }
-            */
         }
 
         static void SpielStart()
@@ -468,9 +470,6 @@ namespace ConsoleAdventureGame
         }
     }
 
-    //Jede Quest Spielt sich in einem bestimmten Biom ab.
-    //Beim spielen von einer Quest spielt man auf einer Karte mit mehreren Räumen
-    //Die Karte mit den Räumen wird im Biom-Objekt gespeichert
     class Quest
     {
         public int level { get; set; }
@@ -491,6 +490,9 @@ namespace ConsoleAdventureGame
 
     }
 
+    // Jede Quest Spielt sich in einem bestimmten Biom ab.
+    // Beim spielen von einer Quest spielt man auf einer Karte mit mehreren Räumen
+    // Die Karte mit den Räumen wird im Biom-Objekt gespeichert
     class Biom
     {
         public string BiomName { get; set; }
