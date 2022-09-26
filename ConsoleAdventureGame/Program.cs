@@ -428,17 +428,14 @@ namespace ConsoleAdventureGame
         {
             new Quest[]
             {
-                //Beispiel
-                new Quest(1,0,"Hallo"),
-                new Quest(2,1,"Jetzt geht es los")
+
             }
         };
 
         //biome[nummer]
         static public Biom[] biome =
         {
-            //Beispiel
-            new Biom("Wald", new int[] {3,4,5 }, new int[] {3,4,5 },3)
+
         };
 
         //gegner[nummer]
@@ -477,30 +474,36 @@ namespace ConsoleAdventureGame
     class Quest
     {
         public int level { get; set; }
-        public string text { get; set; }
-        public int biomNummer { get; set; }
+        public string[] text { get; set; }
+        public Biom biom { get; set; }
 
-        public Quest(int minSpielerLevel, int biomNummer, string text)
+        public Quest(int minSpielerLevel, Biom biom, string[] text)
         {
             this.level = minSpielerLevel;
             this.text = text;
-            this.biomNummer = biomNummer;
+            this.biom = biom;
         }
+    }
+
+    class Karte
+    {
+        public Biom biom { get; set; }
+
     }
 
     class Biom
     {
         public string BiomName { get; set; }
-        public int[] gegnerNummer { get; set; }
+        public Gegner[] gegner { get; set; }
         public int[] waffenNummer { get; set; }
         public int KartenGröße { get; set; }
         public Raum[] räume { get; set; }
         public bool[,] Karte { get; set; }
 
-        public Biom(string BiomName, int[] gegnerNumer, int[] waffenNummer, int KartenGröße)
+        public Biom(string BiomName, Gegner[] gegner, int[] waffenNummer, int KartenGröße)
         {
             this.BiomName = BiomName;
-            this.gegnerNummer = gegnerNumer;
+            this.gegner = gegner;
             this.waffenNummer = waffenNummer;
             this.KartenGröße = KartenGröße;
             KarteGenerieren();
@@ -593,10 +596,11 @@ namespace ConsoleAdventureGame
         public int maxLeben { get; set; }
         public int leben { get; set; }
         public string name { get; set; }
+        public Waffe möglicheWaffen { get; set; }
         public Waffe waffe { get; set; }
         public string[] angriffstexte { get; set; }
 
-        public Gegner(int maxLeben, string name, Waffe[] verfügbareWaffen, double[] waffenHäufigkeit, string[] angriffstexte)
+        public Gegner(string name, int maxLeben, Waffe[] verfügbareWaffen, double[] waffenHäufigkeit, string[] angriffstexte)
         {
             this.maxLeben = maxLeben;
             leben = maxLeben;
