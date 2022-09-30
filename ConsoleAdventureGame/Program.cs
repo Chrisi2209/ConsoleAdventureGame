@@ -122,7 +122,16 @@ namespace ConsoleAdventureGame
 
         static void QuestAuswahl()
         {
+            Quest a = new Quest("der verwunschene Palast", 1, new Biom("Palast", new Gegner[], new int[] { }, 19), "dasadw");
+            Quest b = new Quest("die toten Sümpfe", 1, new Biom("Sumpf", new Gegner[], new int[] { }, 19), "dasadw");
+            Quest c = new Quest("die komische Ecke", 1, new Biom("Ecke", new Gegner[], new int[] { }, 2), "dasadw");
 
+            d = new Quest[] {a, b, c}
+
+            do
+            {
+                Auswahltexte(d, "Welche Quest?")
+            } while (true);
         }
 
         static void QuestAbspielen()
@@ -201,6 +210,76 @@ namespace ConsoleAdventureGame
 
             return ausgewählterText;
         }
+
+        static int Auswahltexte(Quest[] auswahlmöglichkeiten, string frageText)
+        {
+            // returnwert
+            int ausgewählterText = 0;
+
+            // hierdrin wird gespeichert, welcher Knopf gefrückt wurde
+            ConsoleKey gedrückterKnopf;
+
+            do
+            {
+                // Bei jedem Durchlauf muss alles von neu geschrieben werden
+                Console.Clear();
+                Console.WriteLine(frageText);
+
+                // Auswahlmöglichkeiten ausgeben (ausgewähltes ist weiß hinterlegt)
+                for (int i = 0; i < auswahlmöglichkeiten.Length; i++)
+                {
+                    if (i == ausgewählterText)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                    Console.WriteLine(auswahlmöglichkeiten[i].name);
+                }
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                do
+                {
+                    gedrückterKnopf = Console.ReadKey(true).Key;
+                } while (gedrückterKnopf != ConsoleKey.Enter && gedrückterKnopf != ConsoleKey.UpArrow && gedrückterKnopf != ConsoleKey.DownArrow);
+
+                // Auswirkungen des Knopfdrucks berechnen
+                // Der ausgewählteText verhält sich modularisch
+                switch (gedrückterKnopf)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (ausgewählterText != 0)
+                        {
+                            ausgewählterText--;
+                        }
+                        else
+                        {
+                            ausgewählterText = auswahlmöglichkeiten.Length - 1;
+                        }
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        if (ausgewählterText != auswahlmöglichkeiten.Length - 1)
+                        {
+                            ausgewählterText++;
+                        }
+                        else
+                        {
+                            ausgewählterText = 0;
+                        }
+                        break;
+                }
+
+            } while (gedrückterKnopf != ConsoleKey.Enter);
+
+            return ausgewählterText;
+        }
+
 
     }
 
@@ -472,15 +551,17 @@ namespace ConsoleAdventureGame
 
     class Quest
     {
+        public string name { get; set; }
         public int level { get; set; }
         public string[] text { get; set; }
         public Biom biom { get; set; }
 
-        public Quest(int minSpielerLevel, Biom biom, string[] text)
+        public Quest(string name, int minSpielerLevel, Biom biom, string[] text)
         {
             this.level = minSpielerLevel;
             this.text = text;
             this.biom = biom;
+            this.name = name;
         }
     }
 
