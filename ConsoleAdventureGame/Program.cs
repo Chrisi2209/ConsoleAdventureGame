@@ -47,6 +47,7 @@
 */
 
 using System;
+using System.Threading;
 
 namespace ConsoleAdventureGame
 {
@@ -117,7 +118,8 @@ namespace ConsoleAdventureGame
 
         static void SpielStart()
         {
-
+            string anfangstext = "Du befindest dich in einer Taverne."
+            Console.WriteLine(anfangstext)
         }
 
         static void QuestAuswahl()
@@ -128,6 +130,19 @@ namespace ConsoleAdventureGame
         static void QuestAbspielen()
         {
 
+        }
+
+        // Methode um einen Text auszugeben
+        // Dabei ist jeder Buchstabe um 0.1 sek. delayed.
+        // Nach jeder Zeile 1.3 sek.
+        static void TextAusgeben(string[] text)
+        {
+            foreach (string zeile in text)
+            foreach (char character in text)
+            {
+                Console.Write(character);
+                Thread.Sleep(0.1);
+            }
         }
 
         // Gibt die Auswahlmöglichkeiten aus und lässt den Benutzer eine auswählen.
