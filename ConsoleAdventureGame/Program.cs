@@ -54,7 +54,7 @@ namespace ConsoleAdventureGame
     {
         static void Main(string[] args)
         {
-            if (false)
+            if (true)
             {
                 SpielStart();
 
@@ -122,15 +122,24 @@ namespace ConsoleAdventureGame
 
         static void QuestAuswahl()
         {
-            Quest a = new Quest("der verwunschene Palast", 1, new Biom("Palast", new Gegner[], new int[] { }, 19), "dasadw");
-            Quest b = new Quest("die toten Sümpfe", 1, new Biom("Sumpf", new Gegner[], new int[] { }, 19), "dasadw");
-            Quest c = new Quest("die komische Ecke", 1, new Biom("Ecke", new Gegner[], new int[] { }, 2), "dasadw");
+            Quest a = new Quest("der verwunschene Palast", 1, new Biom("Palast", new Gegner[] { }, new int[] { }, 19), new string[] { });
+            Quest b = new Quest("die toten Sümpfe", 1, new Biom("Sumpf", new Gegner[] { }, new int[] { }, 19), new string[] { });
+            Quest c = new Quest("die komische Ecke", 1, new Biom("Ecke", new Gegner[] { }, new int[] { }, 2), new string[] { });
 
-            d = new Quest[] {a, b, c}
+            Player player = new Player();
+
+            Quest[] d = new Quest[] { a, b, c };
+            int ausgewählteQuest;
 
             do
             {
-                Auswahltexte(d, "Welche Quest?")
+                ausgewählteQuest = Auswahltexte(d, "Welche Quest?");
+                d[ausgewählteQuest].BeschreibungSchreiben();
+                if (d[ausgewählteQuest].level > player.level)
+                {
+
+                }
+
             } while (true);
         }
 
@@ -282,6 +291,7 @@ namespace ConsoleAdventureGame
 
 
     }
+
 
 
     static class Mathe
@@ -563,6 +573,12 @@ namespace ConsoleAdventureGame
             this.biom = biom;
             this.name = name;
         }
+
+        public void BeschreibungSchreiben()
+        {
+            Console.WriteLine($"name      : {name}");
+            Console.WriteLine($"min. level: {level}");
+        }
     }
 
     class Karte
@@ -589,7 +605,7 @@ namespace ConsoleAdventureGame
             this.gegner = gegner;
             this.waffenNummer = waffenNummer;
             this.KartenGröße = KartenGröße;
-            KarteGenerieren();
+            // KarteGenerieren();
         }
 
         /*
@@ -597,6 +613,7 @@ namespace ConsoleAdventureGame
          * ein walker geht immer in eine zufällige Richtung und setzt dort einen
          * Raum hin, bis er alle Räume platziert hat.
          */
+
         private void KarteGenerieren()
         {
             // in diesem array steht 1 für hier ist ein Raum und 0 für hier ist kein raum.
